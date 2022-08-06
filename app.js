@@ -40,7 +40,8 @@ app.get("/movies/", async (request, response) => {
   const getQuery = `
     SELECT movie_name FROM movie`;
   const getResponse = await db.all(getQuery);
-  response.send(getResponse.map((eachObject) => changingNames(eachObject)));
+  response.send(getResponse.map((eachObject) => ({ movieName: eachObject.movie_name }))
+  );
 });
 
 app.post("/movies/", async (request, response) => {
